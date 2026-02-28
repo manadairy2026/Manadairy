@@ -40,6 +40,7 @@ export async function ensureDb() {
   if (!isPostgres && !process.env.VERCEL) {
     try {
       const { drizzle: drizzleSqlite } = await import("drizzle-orm/better-sqlite3");
+      // @ts-ignore - dynamic import of native module to avoid Vercel build issues
       const Database = (await import("better-sqlite3")).default;
       const dbPath = process.env.DATABASE_URL || "sqlite.db";
       const sqlite = new Database(dbPath);
