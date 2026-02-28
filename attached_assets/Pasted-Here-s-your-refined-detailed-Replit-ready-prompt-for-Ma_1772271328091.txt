@@ -1,0 +1,240 @@
+Here's your refined, detailed Replit-ready prompt for **Mana Dairy**:
+
+---
+
+# 🥛 MANA DAIRY – Full Website Build Prompt for Replit
+
+---
+
+## PROJECT IDENTITY
+
+**Project Name:** Mana Dairy
+**Tagline:** *"Fresh From Our Farm, Straight To Your Door"*
+**Business Type:** Local fresh cow milk delivery service
+**Platform:** Replit (HTML + CSS + JavaScript, single or multi-page)
+**Goal:** Build a complete, stunning, mobile-responsive dairy delivery website that builds trust, showcases products beautifully, and converts visitors into subscribers/customers.
+
+---
+
+## TECH STACK (Replit-Specific)
+
+Use the following inside Replit's HTML/CSS/JS template:
+
+- **HTML5** – semantic, SEO-friendly structure
+- **Tailwind CSS via CDN** – for responsive utility-first styling
+- **Google Fonts via CDN** – Playfair Display (headings) + DM Sans (body)
+- **Font Awesome via CDN** – for icons (milk bottle, truck, phone, star, etc.)
+- **Vanilla JavaScript** – for interactivity (mobile menu, form validation, scroll effects, order modal)
+- **Unsplash/Pexels image URLs** – for real, high-quality cow and dairy images (no downloads needed, just direct image links)
+- **Google Maps Embed** – for the location/contact section
+
+---
+
+## PAGES & SECTIONS TO BUILD
+
+### 1. 🏠 NAVIGATION BAR (Fixed/Sticky)
+- Logo: "🥛 Mana Dairy" in bold serif font
+- Nav links: Home | Products | About | Subscribe | Contact
+- Right side: **"Order Now"** button in deep green with white text
+- Mobile hamburger menu that slides open smoothly
+- Background turns white with shadow on scroll (JS scroll listener)
+
+---
+
+### 2. 🌅 HERO SECTION (Full Screen Banner)
+- Full-viewport background image: lush green farm with cows and sunrise (Unsplash URL)
+- Dark green overlay (50% opacity) for text readability
+- Large white headline: *"Pure. Fresh. Delivered Daily."*
+- Subtext: *"Farm-fresh cow milk from Mana Dairy, delivered to your doorstep every morning."*
+- Two CTA buttons side by side:
+  - **"Order Now"** – solid gold/amber button
+  - **"See Our Products"** – outlined white button
+- Subtle fade-in animation on load (CSS keyframes)
+- Scroll-down arrow icon bouncing at the bottom
+
+---
+
+### 3. ✨ TRUST BADGES STRIP (below hero)
+- Cream background strip with 4 icons + text in a row:
+  - 🐄 100% Pure Cow Milk
+  - 🌿 No Preservatives
+  - 🚚 Daily Morning Delivery
+  - ❄️ Always Fresh & Cold
+- Slight slide-up animation as user scrolls into view (IntersectionObserver JS)
+
+---
+
+### 4. 🛒 PRODUCTS SECTION
+- Section title: *"Our Fresh Milk Products"*
+- Grid of **product cards** (3 across on desktop, 1 on mobile):
+
+| Product | Description | Price |
+|---|---|---|
+| Full Cream Milk | Rich, whole milk – full nutrition | ₹60 / litre |
+| Toned Milk | Low fat, great taste | ₹50 / litre |
+| Double Toned | Light & healthy daily option | ₹45 / litre |
+| Flavoured Milk | Chocolate, Rose, Kesar | ₹35 / 200ml |
+| Paneer Fresh | Made fresh daily | ₹80 / 200g |
+| Desi Ghee | Pure cow ghee | ₹600 / 500ml |
+
+- Each card has:
+  - Rounded image at top (Unsplash dairy image)
+  - Product name, short description, price badge
+  - **"Add to Order"** button that highlights on hover
+  - Card lifts on hover (CSS box-shadow transition)
+
+---
+
+### 5. 📦 HOW IT WORKS SECTION
+- Title: *"Getting Fresh Milk Is Simple"*
+- 3-step horizontal flow with icons + arrows between:
+  1. 📋 **Choose Your Plan** – Pick daily or weekly delivery
+  2. 📍 **Set Your Address** – We deliver to your door
+  3. 🥛 **Receive Fresh Milk** – Every morning before 7 AM
+- Clean white cards on a light green background
+- Number badges (1, 2, 3) in gold circles
+
+---
+
+### 6. 📅 SUBSCRIPTION / ORDER FORM SECTION
+- Title: *"Start Your Daily Milk Subscription"*
+- Split layout: form on left, farm image on right
+- Form fields:
+  - Full Name
+  - Phone Number
+  - Delivery Address (textarea)
+  - Choose Product (dropdown – all 6 products)
+  - Quantity (number input)
+  - Delivery Frequency: Daily / Every Other Day / Weekly (radio buttons)
+  - Preferred Delivery Time: Before 6 AM / 6–7 AM / 7–8 AM
+  - Start Date (date picker)
+  - Special Instructions (textarea, optional)
+- Submit button: **"Start My Subscription"** in deep green
+- On submit: show a friendly success message modal (JS) saying *"Thank you! We'll confirm your order via WhatsApp."*
+- Add a WhatsApp floating button (bottom right corner) that opens a pre-filled message
+
+---
+
+### 7. 🐄 ABOUT US SECTION
+- Title: *"Who We Are"*
+- Two columns: image left (happy cows on farm), text right
+- Story paragraph about Mana Dairy – local family farm, fresh milk every day, no middlemen, straight from farm to home
+- Three highlight stats in colored boxes:
+  - 🐄 50+ Healthy Cows
+  - 📦 500+ Happy Families
+  - 🌅 5 Years of Fresh Delivery
+- "Learn More" text link or expandable paragraph
+
+---
+
+### 8. ⭐ TESTIMONIALS SECTION
+- Title: *"What Our Customers Say"*
+- Creamy background with 3 testimonial cards in a row:
+  - Customer photo (round avatar from Unsplash people images)
+  - Star rating (5 gold stars using Font Awesome)
+  - Quote text
+  - Customer name + locality
+- Auto-rotating carousel on mobile (pure JS, no library needed)
+
+Sample testimonials to use:
+- *"The milk is so fresh – you can taste the difference. My kids love it!"* – Priya S., Hyderabad
+- *"Never missed a delivery in 2 years. Reliable and pure."* – Ramesh K., Secunderabad
+- *"Switched from packaged milk and never going back. Worth every rupee."* – Anitha M., Kukatpally
+
+---
+
+### 9. 🖼️ FARM PHOTO GALLERY
+- Title: *"Life at Mana Dairy Farm"*
+- CSS grid photo gallery (3 columns, mixed sizes using grid-row/col span)
+- Images: cows grazing, milk being collected, delivery morning, happy customers
+- Hover overlay effect: slight zoom + green tint + "View" icon
+- All images loaded from Unsplash with descriptive alt text
+
+---
+
+### 10. 📞 CONTACT SECTION
+- Two columns:
+  - Left: Contact details
+    - 📞 Phone: +91 98765 43210
+    - 📧 Email: info@manadairy.in
+    - 📍 Address: Mana Dairy Farm, Shamshabad Road, Hyderabad – 500069
+    - WhatsApp button
+    - Social icons: Facebook, Instagram
+  - Right: Embedded Google Maps iframe (your farm/delivery area location)
+- Background: deep green with white text
+
+---
+
+### 11. 🔻 FOOTER
+- Logo + short tagline
+- Three footer columns: Quick Links | Products | Contact
+- Bottom bar: *"© 2025 Mana Dairy. All rights reserved. Made with ❤️ in Hyderabad"*
+- Scroll-to-top button (appears after scrolling down)
+
+---
+
+## DESIGN SYSTEM
+
+| Element | Value |
+|---|---|
+| Primary Green | `#2d6a4f` |
+| Light Green | `#40916c` |
+| Cream/Background | `#fdf6ec` |
+| Gold/Accent | `#d4a017` |
+| Brown/Earthy | `#7c4f2f` |
+| White | `#ffffff` |
+| Heading Font | Playfair Display (serif) |
+| Body Font | DM Sans (sans-serif) |
+| Border Radius | 12px on cards, 50px on buttons |
+| Shadow | `0 8px 32px rgba(0,0,0,0.10)` |
+
+---
+
+## ANIMATIONS & INTERACTIONS
+
+- **Page Load:** Hero text fades in with upward slide (CSS keyframes, 0.8s)
+- **Scroll Reveal:** All sections fade in as they enter viewport (IntersectionObserver)
+- **Hover States:** Cards lift, buttons darken, images zoom slightly (CSS transitions, 0.3s ease)
+- **Mobile Menu:** Slides down smoothly on hamburger click (JS toggle + CSS max-height transition)
+- **Form Submit:** Success modal with green checkmark animates in
+- **WhatsApp Button:** Pulse animation to draw attention
+- **Scroll-to-top:** Smooth scroll behavior (`scroll-behavior: smooth` on html)
+
+---
+
+## REPLIT FILE STRUCTURE
+
+```
+mana-dairy/
+│
+├── index.html         ← All sections in one page (main file)
+├── style.css          ← Custom CSS (animations, overrides, gallery grid)
+└── script.js          ← JS for nav, scroll effects, form, modal, carousel
+```
+
+---
+
+## IMPORTANT REPLIT NOTES
+
+1. Start with Replit's **"HTML, CSS, JS"** template
+2. Add all CDN links in `<head>` (Tailwind, Google Fonts, Font Awesome)
+3. Use **Unsplash Source URLs** for images (e.g., `https://source.unsplash.com/800x600/?cow,milk,farm`) — no API key needed
+4. Keep JavaScript in a separate `script.js` file and link at bottom of `<body>`
+5. Keep custom CSS in `style.css` linked in `<head>` after Tailwind CDN
+6. Test mobile view using Replit's preview — resize browser window
+7. Use HTML `<form>` with `onsubmit` handler for the subscription form (no backend needed yet)
+
+---
+
+## FUTURE PHASES (For Reference)
+
+| Phase | Feature |
+|---|---|
+| Phase 2 | Node.js/Express backend + MongoDB for storing orders |
+| Phase 3 | Customer login & order history dashboard |
+| Phase 4 | Payment gateway (Razorpay/UPI integration) |
+| Phase 5 | React Native mobile app using same API |
+
+---
+
+This prompt gives you or any developer/AI everything needed to build **Mana Dairy** completely on Replit — no ambiguity, no gaps. Simply paste it and build! 🐄🥛
