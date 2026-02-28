@@ -24,9 +24,22 @@ export const subscriptions = table("subscriptions", {
   deliveryTime: text("delivery_time").notNull(),
   startDate: text("start_date").notNull(),
   specialInstructions: text("special_instructions"),
+  trackingId: text("tracking_id").notNull().unique(),
+  status: text("status").notNull().default("Booked"),
 });
 
-export const insertSubscriptionSchema = createInsertSchema(subscriptions).omit({ id: true });
+export const insertSubscriptionSchema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
+  address: z.string().min(10, "Address is too short"),
+  product: z.string(),
+  quantity: z.number().min(1),
+  frequency: z.string(),
+  deliveryTime: z.string(),
+  startDate: z.string(),
+  specialInstructions: z.string().optional(),
+});
 
 export type Subscription = typeof subscriptions.$inferSelect;
 export type InsertSubscription = z.infer<typeof insertSubscriptionSchema>;

@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Terms from "@/pages/Terms";
 import Privacy from "@/pages/Privacy";
+import TrackOrder from "@/pages/TrackOrder";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/track" component={TrackOrder} />
       <Route component={NotFound} />
     </Switch>
   );

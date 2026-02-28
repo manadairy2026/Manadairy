@@ -11,12 +11,20 @@ export async function registerRoutes(
   app.post(api.subscriptions.create.path, async (req, res) => {
     try {
       const input = api.subscriptions.create.input.parse(req.body);
-      const subscription = await storage.createSubscription(input);
+
+      // Generate a unique tracking ID: MANA-XXXXXX
+      const trackingId = `MANA-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
+      const subscription = await storage.createSubscription({
+        ...(input as any),
+        trackingId,
+        status: "Booked"
+      });
 
       // Send email notifications (don't await to avoid slowing down user response)
       import("./mail").then(({ sendSubscriptionEmail, sendUserConfirmationEmail }) => {
-        sendSubscriptionEmail(input);
-        sendUserConfirmationEmail(input);
+        sendSubscriptionEmail(subscription);
+        sendUserConfirmationEmail(subscription);
       });
 
       res.status(201).json(subscription);
@@ -29,6 +37,17 @@ export async function registerRoutes(
       }
       throw err;
     }
+  });
+
+  app.get("/api/track/:trackingId", async (req, res) => {
+    const { trackingId } = req.params;
+    const subscription = await storage.getSubscriptionByTrackingId(trackingId);
+
+    if (!subscription) {
+      return res.status(404).json({ message: "Order not found. Please check your tracking ID." });
+    }
+
+    res.json(subscription);
   });
 
   return httpServer;

@@ -22,10 +22,10 @@ export function useCreateSubscription() {
 
       return api.subscriptions.create.responses[201].parse(await res.json());
     },
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       toast({
-        title: "Subscription Confirmed! 🥛",
-        description: "Thank you for choosing Mana Dairy. We will contact you shortly.",
+        title: "Order Confirmed! 🥛✨",
+        description: `Your order ${data.trackingId} has been placed successfully.`,
         variant: "default",
       });
     },
