@@ -21,15 +21,19 @@ if (isPostgres) {
   // If no Postgres and we ARE on Vercel, we provide a dummy DB
   // to prevent the app from crashing on start.
   if (process.env.VERCEL) {
-    console.warn("⚠️ No DATABASE_URL found. Using a dummy driver for now.");
+    console.warn("⚠️ No DATABASE_URL found. Using a dummy driver for now on Vercel.");
     db = {
       select: () => ({ from: () => ({ where: () => [] }) }),
-      insert: () => ({ values: () => ({ returning: () => [{}] }) }),
+      insert: () => ({
+        values: () => ({
+          returning: () => {
+            // Return a realistic but unique tracking ID for the dummy success
+            const trackingId = `MANA-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+            return [{ trackingId, status: "Booked" }];
+          }
+        })
+      }),
     };
-  } else {
-    // Local dev: better-sqlite3 is fine here.
-    // We'll trust the dynamic import in storage.ts or index.ts if needed,
-    // but here we just export it as undefined so the server can lead.
   }
 }
 

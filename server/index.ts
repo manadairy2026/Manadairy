@@ -1,6 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes.ts";
-import { serveStatic } from "./static.ts";
+import { registerRoutes } from "./routes";
+import { serveStatic } from "./static";
 import { createServer } from "http";
 
 const app = express();
@@ -68,8 +68,12 @@ if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
 // 5. Development Mode (Vite only)
 (async () => {
   if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
-    const { setupVite } = await import("./vite");
-    await setupVite(httpServer, app);
+    try {
+      const { setupVite } = await import("./vite");
+      await setupVite(httpServer, app);
+    } catch (err) {
+      console.error("Vite setup failed:", err);
+    }
   }
 
   // 6. Start the server (Only in non-serverless environments)
