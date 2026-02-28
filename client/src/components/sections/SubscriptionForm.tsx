@@ -264,7 +264,7 @@ export function SubscriptionForm() {
                 )}
               </Button>
             </form>
-          </form>
+          </Form>
         </CardContent>
       </Card>
 
