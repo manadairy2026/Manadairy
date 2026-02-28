@@ -16,7 +16,9 @@ if (isPostgres) {
   pool = new Pool({ connectionString: process.env.DATABASE_URL });
   db = drizzlePg(pool, { schema });
 } else {
-  const dbPath = process.env.DATABASE_URL || "sqlite.db";
+  // On Vercel, the filesystem is read-only except for /tmp/
+  // We use /tmp/sqlite.db as a fallback so the server doesn't crash on startup
+  const dbPath = process.env.DATABASE_URL || (process.env.VERCEL ? "/tmp/sqlite.db" : "sqlite.db");
   const sqlite = new Database(dbPath);
   db = drizzleSqlite(sqlite, { schema });
 }
