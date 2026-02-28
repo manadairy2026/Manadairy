@@ -1,6 +1,10 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request, Response } from "express";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export function serveStatic(app: Express) {
   // Check multiple possible locations for the built frontend
@@ -8,7 +12,8 @@ export function serveStatic(app: Express) {
   const possiblePaths = [
     path.resolve(__dirname, "public"),         // Relative to server/ or dist/
     path.resolve(process.cwd(), "dist", "public"), // Root-based dist/public
-    path.resolve(process.cwd(), "public")      // Fallback
+    path.resolve(process.cwd(), "public"),      // Fallback
+    path.resolve(__dirname, "..", "client", "dist") // Local Dev fallback
   ];
 
   let distPath = "";
@@ -20,16 +25,19 @@ export function serveStatic(app: Express) {
   }
 
   if (!distPath) {
-    // On Vercel, if we haven't built yet or looking in wrong place, don't crash the server
-    // Just log a warning and let the API continue if possible
     console.warn("⚠️ Warning: Could not find the build directory. Static files won't be served.");
     return;
   }
 
-  app.use(express.static(distPath));
+  // Support for static assets
+  app.use(express.static(distPath, { index: false }));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // SPA fallback for all non-API routes
+  app.get("*", (req: Request, res: Response) => {
+    // If it's an API route, let it pass (though it should have been caught already)
+    if (req.path.startsWith("/api")) return res.status(404).json({ message: "API endpoint not found" });
+
+    // Serve index.html for all other routes to support client-side routing
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

@@ -1,14 +1,11 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage.ts";
 import { api } from "../shared/routes.ts";
 import { sendSubscriptionEmail, sendUserConfirmationEmail } from "./mail.ts";
 import { z } from "zod";
 
-export async function registerRoutes(
-  httpServer: Server,
-  app: Express
-): Promise<Server> {
+export function registerRoutes(app: Express): void {
+  // Subscription Creation Route
   app.post(api.subscriptions.create.path, async (req, res) => {
     try {
       const input = api.subscriptions.create.input.parse(req.body);
@@ -22,9 +19,14 @@ export async function registerRoutes(
         status: "Booked"
       });
 
-      // Send email notifications (don't await to avoid slowing down user response)
-      sendSubscriptionEmail(subscription).catch(console.error);
-      sendUserConfirmationEmail(subscription).catch(console.error);
+      // Send email notifications asynchronously (non-blocking)
+      sendSubscriptionEmail(subscription).catch(err => {
+        console.error("❌ Notification error (Subscription):", err);
+      });
+
+      sendUserConfirmationEmail(subscription).catch(err => {
+        console.error("❌ Notification error (User Confirmation):", err);
+      });
 
       res.status(201).json(subscription);
     } catch (err) {
@@ -34,20 +36,25 @@ export async function registerRoutes(
           field: err.errors[0].path.join('.'),
         });
       }
-      throw err;
+      console.error("❌ Subscription API Error:", err);
+      res.status(500).json({ message: "Unable to process your order. Please try again later." });
     }
   });
 
+  // Order Tracking Route
   app.get("/api/track/:trackingId", async (req, res) => {
-    const { trackingId } = req.params;
-    const subscription = await storage.getSubscriptionByTrackingId(trackingId);
+    try {
+      const { trackingId } = req.params;
+      const subscription = await storage.getSubscriptionByTrackingId(trackingId);
 
-    if (!subscription) {
-      return res.status(404).json({ message: "Order not found. Please check your tracking ID." });
+      if (!subscription) {
+        return res.status(404).json({ message: "Order not found. Please verify your tracking ID." });
+      }
+
+      res.json(subscription);
+    } catch (err) {
+      console.error("❌ Tracking API Error:", err);
+      res.status(500).json({ message: "Unable to retrieve tracking details at this time." });
     }
-
-    res.json(subscription);
   });
-
-  return httpServer;
 }

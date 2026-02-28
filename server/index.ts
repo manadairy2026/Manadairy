@@ -22,17 +22,7 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
-export function log(message: string, source = "express") {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
-
+// 1. Logger Middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -51,57 +41,45 @@ app.use((req, res, next) => {
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-
-      log(logLine);
+      console.log(`[express] ${logLine}`);
     }
   });
 
   next();
 });
 
-// Export the app for Vercel/Serverless usage
-export default app;
+// 2. Register API Routes (Synchronous registration for Vercel)
+registerRoutes(app);
 
-import { initDatabase } from "./db.ts";
+// 3. Error Handling Middleware
+app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  console.error("Internal Server Error:", err);
+  if (res.headersSent) return next(err);
+  return res.status(status).json({ message });
+});
 
+// 4. Static File Serving (Synchronous for Production/Vercel)
+if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
+  serveStatic(app);
+}
+
+// 5. Development Mode (Vite only)
 (async () => {
-  await initDatabase();
-  await registerRoutes(httpServer, app);
-
-  app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    console.error("Internal Server Error:", err);
-
-    if (res.headersSent) {
-      return next(err);
-    }
-
-    return res.status(status).json({ message });
-  });
-
-  if (process.env.NODE_ENV === "production") {
-    serveStatic(app);
-  } else {
+  if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
     const { setupVite } = await import("./vite");
     await setupVite(httpServer, app);
   }
 
-  // ONLY listen if NOT in production Vercel environment
-  // Vercel handles the serverless invocation via the exported app
+  // 6. Start the server (Only in non-serverless environments)
   if (!process.env.VERCEL) {
     const port = parseInt(process.env.PORT || "5000", 10);
-    httpServer.listen(
-      {
-        port,
-        host: "localhost",
-      },
-      () => {
-        log(`serving on port ${port}`);
-      },
-    );
+    httpServer.listen({ port, host: "0.0.0.0" }, () => {
+      console.log(`[express] Serving Mana Dairy on port ${port} 🥛✨🚀`);
+    });
   }
 })();
 
-
+// Export for Vercel Serverless Function
+export default app;
