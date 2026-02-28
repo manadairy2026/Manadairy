@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Droplet, ShieldCheck, Sun, ThermometerSnowflake, CheckCircle2, Truck, Calendar, MapPin, MessageCircle } from "lucide-react";
+import { Droplet, ShieldCheck, Sun, ThermometerSnowflake, CheckCircle2, Truck, Calendar, MapPin, MessageCircle, Phone, Mail } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SubscriptionForm } from "@/components/sections/SubscriptionForm";
