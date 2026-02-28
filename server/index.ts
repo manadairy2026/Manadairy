@@ -1,6 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { serveStatic } from "./static";
+import { registerRoutes } from "./routes.ts";
+import { serveStatic } from "./static.ts";
 import { createServer } from "http";
 
 const app = express();
@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 // Export the app for Vercel/Serverless usage
 export default app;
 
-import { initDatabase } from "./db";
+import { initDatabase } from "./db.ts";
 
 (async () => {
   await initDatabase();

@@ -1,5 +1,5 @@
-import { subscriptions, type Subscription, type InsertSubscription } from "../shared/schema";
-import { db } from "./db";
+import { subscriptions, type Subscription, type InsertSubscription } from "../shared/schema.ts";
+import { db } from "./db.ts";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
