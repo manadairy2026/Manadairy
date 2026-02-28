@@ -12,6 +12,13 @@ export async function registerRoutes(
     try {
       const input = api.subscriptions.create.input.parse(req.body);
       const subscription = await storage.createSubscription(input);
+
+      // Send email notifications (don't await to avoid slowing down user response)
+      import("./mail").then(({ sendSubscriptionEmail, sendUserConfirmationEmail }) => {
+        sendSubscriptionEmail(input);
+        sendUserConfirmationEmail(input);
+      });
+
       res.status(201).json(subscription);
     } catch (err) {
       if (err instanceof z.ZodError) {

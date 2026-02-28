@@ -30,6 +30,7 @@ export function SubscriptionForm() {
     resolver: zodResolver(insertSubscriptionSchema),
     defaultValues: {
       fullName: "",
+      email: "",
       phoneNumber: "",
       address: "",
       product: "Full Cream Milk",
@@ -55,7 +56,7 @@ export function SubscriptionForm() {
       <CardContent className="p-6 sm:p-8 md:p-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <FormField
                 control={form.control}
                 name="fullName"
@@ -71,12 +72,25 @@ export function SubscriptionForm() {
               />
               <FormField
                 control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email Address</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="john@example.com" className="bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="+91 98765 43210" className="bg-white" {...field} />
+                      <Input placeholder="+91 87121 31151" className="bg-white" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -91,10 +105,10 @@ export function SubscriptionForm() {
                 <FormItem>
                   <FormLabel>Delivery Address</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="Complete address with landmark" 
-                      className="resize-none bg-white min-h-[100px]" 
-                      {...field} 
+                    <Textarea
+                      placeholder="Complete address with landmark"
+                      className="resize-none bg-white min-h-[100px]"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -136,11 +150,11 @@ export function SubscriptionForm() {
                   <FormItem>
                     <FormLabel>Quantity (Liters/Packs)</FormLabel>
                     <FormControl>
-                      <Input 
-                        type="number" 
+                      <Input
+                        type="number"
                         min="1"
-                        className="bg-white" 
-                        {...field} 
+                        className="bg-white"
+                        {...field}
                         onChange={(e) => field.onChange(parseInt(e.target.value, 10) || 1)}
                       />
                     </FormControl>
@@ -217,10 +231,10 @@ export function SubscriptionForm() {
                 <FormItem>
                   <FormLabel>Special Instructions (Optional)</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="E.g., Ring the bell, leave in the bag outside..." 
-                      className="resize-none bg-white" 
-                      {...field} 
+                    <Textarea
+                      placeholder="E.g., Ring the bell, leave in the bag outside..."
+                      className="resize-none bg-white"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
@@ -228,8 +242,8 @@ export function SubscriptionForm() {
               )}
             />
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full rounded-full py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               disabled={isPending}
             >
@@ -242,9 +256,9 @@ export function SubscriptionForm() {
                 "Confirm Subscription"
               )}
             </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+          </form >
+        </Form >
+      </CardContent >
+    </Card >
   );
 }

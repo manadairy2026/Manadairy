@@ -13,18 +13,18 @@ export function Footer() {
               Pure, fresh, and organic cow milk delivered directly from our farm to your doorstep. We believe in providing the healthiest dairy products for your family.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-primary-foreground/10 p-2 rounded-full hover:bg-secondary hover:text-white transition-colors">
+              <a href="#" className="bg-white/20 p-2.5 rounded-full hover:bg-secondary hover:text-white transition-all duration-300 flex items-center justify-center">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="bg-primary-foreground/10 p-2 rounded-full hover:bg-secondary hover:text-white transition-colors">
+              <a href="#" className="bg-white/20 p-2.5 rounded-full hover:bg-secondary hover:text-white transition-all duration-300 flex items-center justify-center">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="bg-primary-foreground/10 p-2 rounded-full hover:bg-secondary hover:text-white transition-colors">
+              <a href="#" className="bg-white/20 p-2.5 rounded-full hover:bg-secondary hover:text-white transition-all duration-300 flex items-center justify-center">
                 <Twitter size={20} />
               </a>
             </div>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-lg mb-4 text-secondary">Quick Links</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/80">
@@ -34,36 +34,36 @@ export function Footer() {
               <li><a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-lg mb-4 text-secondary">Support</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/80">
               <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Delivery Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms & Conditions</a></li>
+              <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition-colors">Terms & Conditions</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-lg mb-4 text-secondary">Contact Us</h4>
             <ul className="space-y-4 text-sm text-primary-foreground/80">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="shrink-0 text-secondary mt-0.5" />
-                <span>123 Farm View Road, Green Valley District, Dairy State, 12345</span>
+                <span>1-3, Paipalli village, beside amma international schoool Venkatagirikota 517424, Chittoor AP</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="shrink-0 text-secondary" />
-                <span>+91 98765 43210</span>
+                <span>+91 87121 31151</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="shrink-0 text-secondary" />
-                <span>hello@manadairy.com</span>
+                <span>manadairy2026@gmail.com</span>
               </li>
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-primary-foreground/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-primary-foreground/60">
           <p>&copy; {new Date().getFullYear()} Mana Dairy. All rights reserved.</p>
           <p className="mt-2 md:mt-0">Crafted with ❤️ for pure health.</p>

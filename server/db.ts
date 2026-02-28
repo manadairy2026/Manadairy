@@ -1,14 +1,22 @@
-import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
+import { drizzle as drizzleSqlite } from "drizzle-orm/better-sqlite3";
 import pg from "pg";
+import Database from "better-sqlite3";
 import * as schema from "@shared/schema";
 
 const { Pool } = pg;
 
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
-}
+// Use Postgres if DATABASE_URL is a postgres string, otherwise use SQLite
+const isPostgres = process.env.DATABASE_URL?.startsWith("postgres");
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle(pool, { schema });
+export let db: any;
+export let pool: any;
+
+if (isPostgres) {
+  pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  db = drizzlePg(pool, { schema });
+} else {
+  const dbPath = process.env.DATABASE_URL || "sqlite.db";
+  const sqlite = new Database(dbPath);
+  db = drizzleSqlite(sqlite, { schema });
+}
