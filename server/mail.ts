@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { type InsertSubscription } from "@shared/schema";
+import { type InsertSubscription } from "../shared/schema.ts";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",

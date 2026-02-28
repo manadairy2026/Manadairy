@@ -1,7 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { api } from "@shared/routes";
+import { storage } from "./storage.ts";
+import { api } from "../shared/routes.ts";
+import { sendSubscriptionEmail, sendUserConfirmationEmail } from "./mail.ts";
 import { z } from "zod";
 
 export async function registerRoutes(
@@ -22,10 +23,8 @@ export async function registerRoutes(
       });
 
       // Send email notifications (don't await to avoid slowing down user response)
-      import("./mail").then(({ sendSubscriptionEmail, sendUserConfirmationEmail }) => {
-        sendSubscriptionEmail(subscription);
-        sendUserConfirmationEmail(subscription);
-      });
+      sendSubscriptionEmail(subscription).catch(console.error);
+      sendUserConfirmationEmail(subscription).catch(console.error);
 
       res.status(201).json(subscription);
     } catch (err) {

@@ -2,7 +2,7 @@ import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
 import { drizzle as drizzleSqlite } from "drizzle-orm/better-sqlite3";
 import pg from "pg";
 import Database from "better-sqlite3";
-import * as schema from "@shared/schema";
+import * as schema from "../shared/schema.ts";
 
 const { Pool } = pg;
 
