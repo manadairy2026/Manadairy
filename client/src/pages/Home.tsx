@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const products = [
   { id: 1, name: "Full Cream Milk", price: "₹60/L", description: "Rich, creamy, and packed with essential nutrients.", image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=800" },
   { id: 2, name: "Toned Milk", price: "₹50/L", description: "Perfect balance of nutrition and lightness for daily use.", image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&q=80&w=800" },
-  { id: 3, name: "Double Toned", price: "₹45/L", description: "Low fat milk ideal for fitness enthusiasts.", image: "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&q=80&w=800" },
+  { id: 3, name: "Double Toned", price: "₹45/L", description: "Low fat milk ideal for fitness enthusiasts.", image: "https://images.unsplash.com/photo-1559598467-f8b76c8155d0?auto=format&fit=crop&q=80&w=800" },
   { id: 4, name: "Flavoured Milk", price: "₹35/200ml", description: "Delicious organic flavors loved by kids.", image: "https://images.unsplash.com/photo-1572913017567-02f0649aebeb?auto=format&fit=crop&q=80&w=800" },
   { id: 5, name: "Paneer Fresh", price: "₹80/200g", description: "Soft, malai paneer made from 100% cow milk.", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc0?auto=format&fit=crop&q=80&w=800" },
   { id: 6, name: "Desi Ghee", price: "₹600/500ml", description: "Traditional bilona ghee with rich aroma.", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=800" },
@@ -35,7 +35,7 @@ export default function Home() {
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&q=80&w=2000" 
+            src="https://images.unsplash.com/photo-1596731056586-b48fb50b92db?auto=format&fit=crop&q=80&w=2000" 
             alt="Farm landscape at sunrise" 
             className="w-full h-full object-cover"
           />
