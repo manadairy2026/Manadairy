@@ -55,10 +55,14 @@ async function buildAll() {
     define: {
       "process.env.NODE_ENV": '"production"',
     },
-    minify: true,
-    external: externals,
     logLevel: "info",
+    external: externals,
   });
+
+  console.log("Syncing assets to root public...");
+  const { cp } = await import("fs/promises");
+  await rm("public", { recursive: true, force: true });
+  await cp("dist/public", "public", { recursive: true });
 }
 
 buildAll().catch((err) => {

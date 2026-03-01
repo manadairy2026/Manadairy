@@ -12,9 +12,9 @@ export function serveStatic(app: Express) {
   // Check multiple possible locations for the built frontend
   // This helps when running from server/index.ts vs dist/index.cjs
   const possiblePaths = [
+    path.resolve(process.cwd(), "public"),      // Vercel root public/
     path.resolve(_dirname, "public"),         // Relative to server/ or dist/
     path.resolve(process.cwd(), "dist", "public"), // Root-based dist/public
-    path.resolve(process.cwd(), "public"),      // Fallback
     path.resolve(_dirname, "..", "client", "dist") // Local Dev fallback
   ];
 
