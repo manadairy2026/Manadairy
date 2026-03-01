@@ -3,17 +3,19 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Cross-platform path detection for both ESM (dev) and CJS (prod bundle)
+// @ts-ignore - handling hybrid environment globals safely
+const _filename = typeof __filename !== 'undefined' ? __filename : fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
 export function serveStatic(app: Express) {
   // Check multiple possible locations for the built frontend
   // This helps when running from server/index.ts vs dist/index.cjs
   const possiblePaths = [
-    path.resolve(__dirname, "public"),         // Relative to server/ or dist/
+    path.resolve(_dirname, "public"),         // Relative to server/ or dist/
     path.resolve(process.cwd(), "dist", "public"), // Root-based dist/public
     path.resolve(process.cwd(), "public"),      // Fallback
-    path.resolve(__dirname, "..", "client", "dist") // Local Dev fallback
+    path.resolve(_dirname, "..", "client", "dist") // Local Dev fallback
   ];
 
   let distPath = "";

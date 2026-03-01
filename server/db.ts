@@ -54,3 +54,10 @@ export async function ensureDb() {
     }
   }
 }
+
+// Pre-initialize for faster response times if not on Vercel
+if (!process.env.VERCEL) {
+  ensureDb().catch(err => {
+    console.warn("⚠️ Initial database connection postponed until first request.");
+  });
+}

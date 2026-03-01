@@ -1,7 +1,7 @@
 import type { Express } from "express";
-import { storage } from "./storage.ts";
-import { api } from "../shared/routes.ts";
-import { sendSubscriptionEmail, sendUserConfirmationEmail } from "./mail.ts";
+import { storage } from "./storage";
+import { api } from "../shared/routes";
+import { sendSubscriptionEmail, sendUserConfirmationEmail } from "./mail";
 import { z } from "zod";
 
 export function registerRoutes(app: Express): void {
